@@ -1,4 +1,8 @@
 # Byte-compiled / optimized / DLL files
+AUTHORS
+ChangeLog
+build/*
+build-stamp
 __pycache__/
 *.py[cod]
 *$py.class
