@@ -14,11 +14,11 @@
 #    under the License.
 
 
-from oslo_versionedobjects import fields as obj_fields
-
 from neutron.objects import base
 from neutron.objects import common_types
-from neutron.plugins.ml2.drivers.omnipath.db import models as omni_model
+from oslo_versionedobjects import fields as obj_fields
+
+from omnipath.db import models as omni_model
 
 
 # TODO(manjeets) move this custom range type

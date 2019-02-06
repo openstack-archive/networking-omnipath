@@ -12,8 +12,13 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-import pbr.version
+import gettext
 
+import six
 
-__version__ = pbr.version.VersionInfo(
-    'omnipath').version_string()
+params = {}
+
+if six.PY2:
+    params = {'unicode': 1}
+
+gettext.install('omnipath', **params)

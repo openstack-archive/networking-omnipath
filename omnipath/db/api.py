@@ -13,7 +13,7 @@
 #    under the License.
 
 
-from neutron.plugins.ml2.drivers.omnipath.db import models
+from omnipath.db import models
 
 
 def record_pending_entry(context, res_uuid,

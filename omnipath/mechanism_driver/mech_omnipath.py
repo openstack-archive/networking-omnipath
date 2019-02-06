@@ -361,7 +361,6 @@ class OmnipathMechanismDriver(api.MechanismDriver):
         pass
 
     def _unplug_port_from_network(self, context):
-        import pdb;pdb.set_trace()
         self.delete_port_precommit(context)
         self.omnipath_thread.set_sync_event()
 

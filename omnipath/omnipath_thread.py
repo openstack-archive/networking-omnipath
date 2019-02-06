@@ -18,8 +18,8 @@ import threading
 from neutron_lib import context as nl_context
 from oslo_log import log as logging
 
-from neutron.plugins.ml2.drivers.omnipath.db import api as opadbapi
-from neutron.plugins.ml2.drivers.omnipath.mechanism_driver import fabric_agent
+from omnipath.db import api as opadbapi
+from omnipath.mechanism_driver import fabric_agent
 
 LOG = logging.getLogger(__name__)
 

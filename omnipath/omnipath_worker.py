@@ -23,7 +23,8 @@ from oslo_service import loopingcall
 
 from neutron._i18n import _
 from neutron.agent.linux import daemon
-from neutron.plugins.ml2.drivers.omnipath import omnipath_thread as journal
+
+from omnipath import omnipath_thread as journal
 
 LOG = logging.getLogger(__name__)
 

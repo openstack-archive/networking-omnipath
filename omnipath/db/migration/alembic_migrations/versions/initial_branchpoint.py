@@ -12,6 +12,9 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
+from neutron.db.migration import cli
+
+
 """initial branchpoint
 
 Revision ID: initial_branchpoint
@@ -23,7 +26,7 @@ Create Date: Tue Feb 5 10:44:02 PST 2019
 # revision identifiers, used by Alembic.
 revision = 'initial_branchpoint'
 down_revision = None
-
+branch_labels = (cli.EXPAND_BRANCH,)
 
 def upgrade():
     pass

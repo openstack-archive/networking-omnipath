@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+# functions - Configure omnipath mechanism drivers
+
+function install_omnipath {
+    echo "Installing networking-omnipath driver for Omnipath"
+    setup_develop $NETWORKING_OMNIPATH_DIR
+    neutron-db-manage upgrade head --subproject=networking-omnipath
+}
+
+function remove_omnipath {
+   echo "Removing networking-omnipath this may take minutes."
+   sudo pip uninstall networking-omnipath
+}
+
+function configure_neutron_omnipath {
+    iniset $NEUTRON_CORE_PLUGIN_CONF ml2 mechanism_drivers $Q_ML2_PLUGIN_MECHANISM_DRIVERS,"mech_omnipath"
+    iniset $NEUTRON_CORE_PLUGIN_CONF ml2 tenant_network_types "vlan"
+    iniset $NEUTRON_CORE_PLUGIN_CONF ml2_type_flat flat_networks = public,mynet
+    iniset $NEUTRON_CORE_PLUGIN_CONF ml2_type_vlan network_vlan_ranges = mynet:2:2000
+}
+    
+function neutron_plugin_create_nova_conf {
+    :
+}
