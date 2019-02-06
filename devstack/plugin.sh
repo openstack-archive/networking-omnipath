@@ -27,7 +27,7 @@ if is_service_enabled q-svc || is_service_enabled neutron-api; then
     if [[ "$1" == "stack" && "$2" == "install" ]]; then
        install_omnipath
     elif [[ "$1" == "stack" && "$2" == "post-config" ]]; then
-       install_omnipath
+       configure_neutron_omnipath
     fi
 
     if [[ "$1" == "unstack" ]]; then
