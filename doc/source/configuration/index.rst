@@ -6,7 +6,7 @@ Configuration Reference
 
 This section provides configuration options for networking-omnipath,
 that needs to be set in addition to neutron configuration, for all
-other configuration examples like neutron.conf and ml2_conf.ini,
+other configuration examples like neutron.conf and ml2_omnipath.ini,
 neutron repo can be referred.
 
 .. show-options::
@@ -16,7 +16,7 @@ neutron repo can be referred.
 Configuration Samples
 ---------------------
 
-This section provides sample configuration file ml2_conf.ini
+This section provides sample configuration file ml2_omnipath.ini
 
 
 .. toctree::

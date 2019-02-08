@@ -10,6 +10,3 @@ Stein specs
 .. toctree::
    :glob:
    :maxdepth: 1
-
-   stein/*
-

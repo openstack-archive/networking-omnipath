@@ -3,9 +3,7 @@ Welcome to networking-omnipath!
 ===============================
 
 .. Team and repository tags
-
-.. image:: #(coming soon)
-    :target: #(commin soon)
+   # TBD
 
 .. Change things from this point on
 
