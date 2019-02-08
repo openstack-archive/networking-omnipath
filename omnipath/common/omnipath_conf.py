@@ -51,4 +51,4 @@ cfg.CONF.register_opts(omnipath_opts, "ml2_omnipath")
 
 
 def list_opts():
-    return [('ml2_omnipath', odl_opts)]
+    return [('ml2_omnipath', omnipath_opts)]
