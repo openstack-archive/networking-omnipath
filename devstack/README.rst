@@ -9,9 +9,9 @@
 
 2. Copy the sample local.conf over::
 
-     cp networking-omnipath/devstack/local_ironicconf.example devstack/local.conf
+     cp networking-omnipath/devstack/local_ironic.conf.example devstack/local.conf
 
-3. Optionally, to manually configure this:
+3. Add HOST_IP value in local.conf and enable networking-omnipath plugin:
 
    Add this repo as an external repository::
 
