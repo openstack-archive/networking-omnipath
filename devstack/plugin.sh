@@ -13,7 +13,7 @@
 #    under the License.
 
 # devstack/plugin.sh
-# networking-ovn actions for devstack plugin framework
+# networking-omnipath actions for devstack plugin framework
 
 # Save trace setting
 set +o xtrace
