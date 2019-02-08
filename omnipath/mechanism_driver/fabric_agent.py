@@ -129,38 +129,8 @@ class FabricAgentClient(object):
     def __init__(self):
         self.cli = FabricAgentCLI()
 
-    # Neutron FabricAgentClient sending requests to Fabric Agent:
-    def full_sync(self, guids_info):
-        """Will send list of GUIDs to be created/deleted to
-        OpenStack Fabric Agent. The creates/deletes are implicit.
-
-        :param guid_info: {vf_name1: [guid1, guid2], vf_name2: [guid3, guid4]}
-        :return: bind status
-        """
-
-        # lock
-        # Add global lock so that this command is sent by
-        # only one neutron server
-        for vf_name, guids in guids_info:
-            config_status = self.cli.osfa_config_commands(
-                "add", vf_name, guids)
-            if config_status == 2:
-                return "ERROR"
-
-        commit_status = self.cli.osfa_management_commands("commit")
-        if commit_status != 0:
-            return "ERROR"
-
-        reload_status = self.cli.osfa_management_commands("reload")
-        if reload_status != 0:
-            # Port Status ERROR
-            return "ERROR"
-
-        # Port status down
-        return "DOWN"
-
     def get_port_status(self, vf_name, guid):
-        """
+        """Get status of port
 
         :param vf_name: Name of the VF
         :param guid: ID of the physical server

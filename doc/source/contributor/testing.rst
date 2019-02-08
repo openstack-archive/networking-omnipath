@@ -1,1 +1,4 @@
-.. include:: ../../../TESTING.rst
+Networking OmniPath Testing
+---------------------------
+
+# TBD

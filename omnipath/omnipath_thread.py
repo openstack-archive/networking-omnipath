@@ -13,7 +13,11 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
+import abc
+
 import threading
+
+import six
 
 from neutron_lib import context as nl_context
 from oslo_log import log as logging
@@ -27,6 +31,7 @@ LOG = logging.getLogger(__name__)
 sync_time = 10
 
 
+@six.add_metaclass(abc.ABCMeta)
 class OmniPathThread(object):
 
     def __init__(self, start_thread=True, fabric_cli=None):

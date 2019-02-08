@@ -25,10 +25,10 @@ from oslo_log import log
 from six import moves
 
 from neutron._i18n import _
-from neutron.conf.plugins.ml2.drivers import omnipath_conf
 from neutron.db import api as db_api
 from neutron.plugins.ml2.drivers import helpers
 
+from omnipath.common import omnipath_conf
 from omnipath.common import omnipath_exceptions
 from omnipath.object import omnipathallocation as pkeyalloc
 

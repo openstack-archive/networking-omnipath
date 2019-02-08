@@ -14,12 +14,13 @@ neutron with OmniPath fabric.
   (private) networks. L3 functionality is optional when using it for
   baremetal provisioning with OmniPath Fabric.
 
-* Compute - Runs the hypervisor and optional layer-2 agent, if omnipath switching
-  is used along with other L2 backends then a layer-2 agent may be needed on compute.
+* Compute - Runs the hypervisor and optional layer-2 agent,
+  if omnipath switching is used along with other L2 backends
+  then a layer-2 agent may be needed on compute.
 
 
 Networking-omnipath Installation
----------------------------
+--------------------------------
 
 .. code-block:: console
 
@@ -64,7 +65,7 @@ All related neutron services need to be restarted after configuration change.
         type_drivers = local,flat,vlan,vxlan
         tenant_network_types = vlan
 
-	[ml2_type_flat]
+        [ml2_type_flat]
         flat_networks = public,PYHSICAL_NET
 
      .. note::
@@ -81,7 +82,7 @@ All related neutron services need to be restarted after configuration change.
 
      .. note::
 
-	PHYSICAL_NET is the value used for physical network in flat networks.
+        PHYSICAL_NET is the value used for physical network in flat networks.
 
    * Configure ML2 Omnipath
 

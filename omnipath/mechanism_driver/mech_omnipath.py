@@ -53,8 +53,7 @@ class OmnipathMechanismDriver(api.MechanismDriver):
 
     @staticmethod
     def update_port_status_db(context, port_id, status):
-        """
-        Update Ports in DB
+        """Update Ports in DB
 
         :param port_id: ID of port to update status
         :param status: Status of the port
@@ -67,12 +66,13 @@ class OmnipathMechanismDriver(api.MechanismDriver):
     @staticmethod
     def _is_port_supported(port):
         """Return whether a port is supported by this driver.
+
         Ports supported by this driver have a VNIC type of 'baremetal'.
         :param port: The port to check
         :returns: Whether the port is supported by the NGS driver
         """
         vnic_type = port[portbindings.VNIC_TYPE]
-	return vnic_type == portbindings.VNIC_BAREMETAL
+        return vnic_type == portbindings.VNIC_BAREMETAL
 
     def create_network_precommit(self, context):
         """Allocate resources for a new network.
@@ -307,8 +307,8 @@ class OmnipathMechanismDriver(api.MechanismDriver):
             return
         port['guid'] = node_guid
         opadbapi.record_pending_entry(context._plugin_context,
-                              port['id'], "port", port,
-                              state='waiting')
+                                      port['id'], "port", port,
+                                      state='waiting')
 
     def create_port_postcommit(self, context):
         """Create a port.

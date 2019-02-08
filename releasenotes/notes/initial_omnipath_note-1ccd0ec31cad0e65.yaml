@@ -1,0 +1,5 @@
+---
+prelude: >
+    This is initial release note for project networking-omnipath that enables
+    OmniPath fabric with OpenStack networking. Networking OmniPath is a mechanism
+    driver that extends OpenStack neutron api to use OmniPath fabric as backend.

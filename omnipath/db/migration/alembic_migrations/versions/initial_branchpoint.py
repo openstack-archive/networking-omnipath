@@ -28,5 +28,6 @@ revision = 'initial_branchpoint'
 down_revision = None
 branch_labels = (cli.EXPAND_BRANCH,)
 
+
 def upgrade():
     pass
