@@ -13,8 +13,8 @@ Summary
 -------
 
 OpenStack networking-omnipath is a ML2 mechanism driver that integrates
-OpenStack Neutron API with Omnipath ackend. It enables Omnipath switching
-fabric in a OpenStack cloud and each network in openstack networking realm
+OpenStack Neutron API with Omnipath backend. It enables Omnipath switching
+fabric in OpenStack cloud and each network in openstack networking realm
 corresponds to a virtual fabric on omnipath side.
 
 To report and discover bugs in networking-omnipath the following
