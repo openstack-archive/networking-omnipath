@@ -103,3 +103,13 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+/.*
+!/.coveragerc
+!/.gitignore
+!/.gitreview
+!/.mailmap
+!/.pylintrc
+!/.stestr.conf
+!/.zuul.d
+.stestr/

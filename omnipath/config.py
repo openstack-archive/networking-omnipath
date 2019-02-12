@@ -40,8 +40,4 @@ omnipath_opts = [
         "poll_interval",
         help="Interval in seconds which a full sync is done with OPA FM Agent"
     ),
-    cfg.StrOpt(
-        "pkey_ranges",
-        help="Interval in seconds which a full sync is done with OPA FM Agent"
-    ),
 ]
