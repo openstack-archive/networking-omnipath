@@ -1,4 +1,4 @@
-# Copyright (c) 2018 Intel Corporation
+# Copyright (c) 2019 Intel Corporation
 # All Rights Reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -28,9 +28,3 @@ OPA_RELOAD = "reload"
 OPA_NF = 2
 OPA_SUCCESS = 0
 OPA_FAIL = 1
-
-ALLOWED_OPA_COMMANDS = (OPA_CREATE, OPA_ADD,
-                        OPA_REMOVE, OPA_DELETE,
-                        OPA_COMMIT, OPA_RESTART,
-                        OPA_ISMEMBER, OPA_ISNOTMEMBER,
-                        OPA_RESET, OPA_RELOAD)
