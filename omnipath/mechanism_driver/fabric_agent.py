@@ -18,6 +18,7 @@ import paramiko
 from oslo_config import cfg as config
 from oslo_log import log as logging
 
+from omnipath.common import constants
 from omnipath.common import omnipath_conf
 from omnipath.common import omnipath_exceptions
 
@@ -70,16 +71,16 @@ class FabricAgentCLI(object):
 
     def osfa_config_commands(self, command, vf_name, *args):
         try:
-            if command == "create":
+            if command == constants.OPA_CREATE:
                 pkey = "--pkey " + str(args[0])
-                cmd = [OPA_BINARY, "create", vf_name, pkey]
-            elif command == "delete":
-                cmd = [OPA_BINARY, "delete", vf_name]
-            elif command == "add":
-                cmd = [OPA_BINARY, "add", vf_name,
+                cmd = [OPA_BINARY, constants.OPA_CREATE, vf_name, pkey]
+            elif command == constants.OPA_DELETE:
+                cmd = [OPA_BINARY, constants.OPA_DELETE, vf_name]
+            elif command == constants.OPA_ADD:
+                cmd = [OPA_BINARY, constants.OPA_ADD, vf_name,
                        "".join(str(x + " ") for x in args).rstrip()]
-            elif command == "remove":
-                cmd = [OPA_BINARY, "remove", vf_name,
+            elif command == constants.OPA_REMOVE:
+                cmd = [OPA_BINARY, constants.OPA_REMOVE, vf_name,
                        "".join(str(x + " ") for x in args).rstrip()]
             else:
                 raise omnipath_exceptions.FabricAgentUnknownCommandError
@@ -92,11 +93,11 @@ class FabricAgentCLI(object):
         try:
             if command == "exist":
                 cmd = [OPA_BINARY, "exist", vf_name]
-            elif command == "ismember":
-                cmd = [OPA_BINARY, "ismember", vf_name,
+            elif command == constants.OPA_ISMEMBER:
+                cmd = [OPA_BINARY, constants.OPA_ISMEMBER, vf_name,
                        "".join(str(x + " ") for x in args).rstrip()]
-            elif command == "isnotmember":
-                cmd = [OPA_BINARY, "isnotmember", vf_name,
+            elif command == constants.OPA_ISNOTMEMBER:
+                cmd = [OPA_BINARY, constants.OPA_ISNOTMEMBER, vf_name,
                        "".join(str(x + " ") for x in args).rstrip()]
             else:
                 raise omnipath_exceptions.FabricAgentUnknownCommandError
@@ -109,12 +110,12 @@ class FabricAgentCLI(object):
         try:
             if command == "reset":
                 cmd = [OPA_BINARY, "reset"]
-            elif command == "commit":
-                cmd = [OPA_BINARY, "commit", "-f"]
-            elif command == "reload":
-                cmd = [OPA_BINARY, "reload"]
-            elif command == "restart":
-                cmd = [OPA_BINARY, "restart"]
+            elif command == constants.OPA_COMMIT:
+                cmd = [OPA_BINARY, constants.OPA_COMMIT, "-f"]
+            elif command == constants.OPA_RELOAD:
+                cmd = [OPA_BINARY, constants.OPA_RELOAD]
+            elif command == constants.OPA_RESTART:
+                cmd = [OPA_BINARY, constants.OPA_RESTART]
             elif command == "abort":
                 cmd = [OPA_BINARY, "killall -9", OPA_BINARY]
             else:
@@ -138,7 +139,7 @@ class FabricAgentClient(object):
         """
 
         query_status = self.cli.osfa_query_commands(
-            "ismember", vf_name, [guid])
+            constants.OPA_ISMEMBER, vf_name, [guid])
         if query_status == 0:
             return "UP"
         else:

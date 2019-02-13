@@ -131,3 +131,18 @@ class TestOmniPathMechanismDriver(test_plugin.Ml2PluginV2TestCase,
         context.current['binding:vnic_type'] = 'not_baremetal'
         is_supported = self.mech_driver._is_port_supported(context.current)
         self.assertFalse(is_supported)
+
+    def test_db_multiple_rows_get(self):
+        ctx_net1 = self._get_fake_network_context()
+        ctx_net2 = self._get_fake_network_context()
+        self.mech_driver.create_network_precommit(ctx_net1)
+        self.mech_driver.create_network_precommit(ctx_net2)
+        res = db_api.get_all_entries_by_state(ctx_net2, "pending")
+        self.assertEqual(2, len(res))
+        db_api.update_multiple_rows(ctx_net2, "completed",
+                                    [ctx_net1.current['id'],
+                                     ctx_net2.current['id']])
+        res2 = db_api.get_all_entries_by_state(ctx_net2, "completed")
+        self.assertEqual(2, len(res2))
+        for row in res2:
+            self.assertEqual("completed", row.state)

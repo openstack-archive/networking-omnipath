@@ -39,11 +39,6 @@ omnipath_opts = [
         "poll_interval",
         help=_("Interval in seconds which a full sync is done"
                "with OPA FM Agent ")),
-    cfg.ListOpt('pkey_ranges',
-                default=["pkey:2:2000"],
-                help=_("Comma-separated list of <pki_min>:<pki_max> tuples "
-                       "enumerating ranges of pkey range IDs that are "
-                       "available for tenant network allocation")),
 ]
 
 

@@ -24,7 +24,6 @@ from neutron.db import provisioning_blocks
 from neutron.objects import ports
 
 from omnipath.common import constants as op_const
-from omnipath.common import omnipath_exceptions
 from omnipath.db import api as opadbapi
 from omnipath.mechanism_driver import fabric_agent
 from omnipath import omnipath_thread as ojournal
@@ -89,7 +88,7 @@ class OmnipathMechanismDriver(api.MechanismDriver):
         net = context.current
         res_id = net['id']
         res_type = "network"
-        net['operation'] = "create"
+        net['operation'] = op_const.OPA_CREATE
         net['op_type'] = "config"
         opadbapi.record_pending_entry(
             context._plugin_context, res_id, res_type, net)
@@ -159,7 +158,7 @@ class OmnipathMechanismDriver(api.MechanismDriver):
         net = context.current
         res_id = net['id']
         res_type = "network"
-        net['operation'] = "delete"
+        net['operation'] = op_const.OPA_DELETE
         net['op_type'] = "config"
         row = opadbapi.get_resource_row(context._plugin_context,
                                         res_id, res_type)
@@ -168,18 +167,6 @@ class OmnipathMechanismDriver(api.MechanismDriver):
         row.data = net
         row.state = 'pending'
         context._plugin_context.session.merge(row)
-
-    def _verify_op_status(self, cmd, status, vf_id, res):
-        if status == op_const.OPA_SUCCESS:
-            return
-        elif status == op_const.OPA_FAIL:
-            LOG.error("Operation %(op) failed for resource %(res). "
-                      "with %(res_id). ", {'op': cmd, 'res': res,
-                                           'res_id': vf_id})
-            raise omnipath_exceptions.FabricAgentBadOperation
-        else:
-            LOG.error("Command %(cmd) with bad arguments. ", cmd)
-            raise omnipath_exceptions.FabricAgentUnknownCommandError
 
     def delete_network_postcommit(self, context):
         """Delete a network.
@@ -298,7 +285,7 @@ class OmnipathMechanismDriver(api.MechanismDriver):
         of the current transaction.
         """
         port = context.current
-        port['operation'] = "create"
+        port['operation'] = op_const.OPA_CREATE
         port['op_type'] = "config"
         profile = context.current.get(portbindings.PROFILE)
         node_guid = profile.get('guid')
@@ -381,7 +368,7 @@ class OmnipathMechanismDriver(api.MechanismDriver):
         node_guid = portdict.get('guid') if portdict else None
         if not port_row or not node_guid:
             return
-        port["operation"] = "delete"
+        port["operation"] = op_const.OPA_DELETE
         port["guid"] = node_guid
         port_row.state = 'waiting'
         port_row.data = port

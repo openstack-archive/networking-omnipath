@@ -24,6 +24,7 @@ from oslo_log import log as logging
 
 from omnipath.db import api as opadbapi
 from omnipath.mechanism_driver import fabric_agent
+from omnipath import omnipath_exceptions as omp_exc
 
 LOG = logging.getLogger(__name__)
 
@@ -83,6 +84,7 @@ class OmniPathThread(object):
             self.fabric_cli.osfa_management_commands("reload")
         except Exception:
             LOG.exception("Error on omnipath sync check if fabric is up")
+            raise omp_exc.FabricAgentCLIError
 
     def sync_omnipath_operations(self):
         LOG.debug("Started syncing with omnipath fabric")
@@ -151,29 +153,6 @@ class OmniPathThread(object):
                                           port_del_ids)
 
         return len(port_bind_ids) + len(port_del_ids)
-
-    def _process_ports(self, context, all_waiting_ports):
-        port_count = 0
-        port_add_batch, port_del_batch = self._prepare_ports_batch(
-            all_waiting_ports)
-        for port in all_waiting_ports:
-            port_guid = port.data['guid']
-            network_id = port.data['network_id']
-            if port.data['operation'] == "bind":
-                status = self.fabric_cli.osfa_config_commands(
-                    "add", network_id, port_guid)
-                LOG.debug("Successfully bound the port")
-                op_state = 'completed' if status == 0 else 'failed'
-                port_count = port_count + 1
-                opadbapi.update_row_state(context, op_state, port)
-            if port.data['operation'] == "delete":
-                LOG.debug("Removing Port from fabric")
-                status = self.fabric_cli.osfa_config_commands(
-                    "remove", network_id, port_guid)
-                port_count = port_count + 1
-                op_state = 'completed' if status == 0 else 'failed'
-                opadbapi.update_row_state(context, op_state, port)
-        return port_count
 
     def _process_entry(self, context, entry):
         data = entry.get('data')
