@@ -390,13 +390,6 @@ class OmnipathMechanismDriver(api.MechanismDriver):
         # synced every "sync_time" as done in  __init__
         self.omnipath_thread.set_sync_event()
 
-    def _commit_and_reload_switch(self):
-        try:
-            self.opafmvf.cli.osfa_management_commands("commit")
-            self.opafmvf.cli.osfa_management_commands("reload")
-        except Exception:
-            LOG.exception("Error committing to switch")
-
     def bind_port(self, context):
         """Attempt to bind a port.
 

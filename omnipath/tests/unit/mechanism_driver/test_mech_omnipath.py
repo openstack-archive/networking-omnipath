@@ -89,6 +89,7 @@ class TestOmniPathMechanismDriver(test_plugin.Ml2PluginV2TestCase,
                    'binding:vif_type': 'unbound',
                    'mac_address': 'fake_mac'}
         context = mock.Mock(current=current)
+        context.network = fake_net
         context.session = self.session
         context._plugin_context = self.db_context
         return context
@@ -146,3 +147,27 @@ class TestOmniPathMechanismDriver(test_plugin.Ml2PluginV2TestCase,
         self.assertEqual(2, len(res2))
         for row in res2:
             self.assertEqual("completed", row.state)
+
+    def test_all_postcommits(self):
+        with mock.patch.object(
+            self.mech_driver.omnipath_thread, "set_sync_event") \
+                as mock_sync:
+            self.mech_driver.create_network_postcommit(mock.ANY)
+            self.mech_driver.delete_network_postcommit(mock.ANY)
+            self.mech_driver.create_port_postcommit(mock.ANY)
+            self.mech_driver.delete_port_postcommit(mock.ANY)
+            # call count should be 3 since create_port doesn't set_sync_event
+            self.assertEqual(3, mock_sync.call_count)
+
+    @mock.patch('neutron.db.provisioning_blocks.provisioning_complete')
+    def test_bind_port(self, mock_pb):
+        ctx_port = self._get_fake_port_context()
+        ctx_port.segments_to_bind = [{'id': 'fake_segment'}]
+        ctx_port.set_binding = mock.Mock()
+        with mock.patch.object(
+            self.mech_driver.omnipath_thread, "set_sync_event") \
+                as mock_bind:
+            self.mech_driver.create_port_precommit(ctx_port)
+            self.mech_driver.bind_port(ctx_port)
+        self.assertTrue(mock_bind.called)
+        self.assertTrue(mock_pb.called)
