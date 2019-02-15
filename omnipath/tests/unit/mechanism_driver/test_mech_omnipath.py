@@ -16,42 +16,16 @@ import random
 
 import mock
 
-from neutron_lib.plugins import directory
-from oslo_config import cfg
 from oslo_utils import uuidutils
 
-from neutron.plugins.ml2.drivers import type_flat  # noqa
-from neutron.tests.unit.plugins.ml2 import test_plugin
-
 from omnipath.db import api as db_api
-from omnipath.tests.unit import db_base
+from omnipath.tests.unit import base
 
 
-MECH_OMNIPATH = 'omnipath_mech'
-
-
-class TestOmniPathMechanismDriver(test_plugin.Ml2PluginV2TestCase,
-                                  db_base.DBTestCase):
-
-    _mechanism_drivers = [MECH_OMNIPATH]
-    _extension_drivers = ['port_security']
+class TestOmniPathMechanismDriver(base.TestOmniPathBase, base.DBTestCase):
 
     def setUp(self):
-        cfg.CONF.set_override('extension_drivers',
-                              self._extension_drivers,
-                              group='ml2')
-        cfg.CONF.set_override('tenant_network_types',
-                              ['vlan'],
-                              group='ml2')
-        cfg.CONF.set_override('flat_networks',
-                              ['public', 'mynet'],
-                              group='ml2_type_flat')
-        cfg.CONF.set_override('network_vlan_ranges',
-                              ['mynet:2:2000'],
-                              group='ml2_type_vlan')
         super(TestOmniPathMechanismDriver, self).setUp()
-        mechmanager = directory.get_plugin().mechanism_manager
-        self.mech_driver = mechmanager.mech_drivers[MECH_OMNIPATH].obj
 
     def _get_fake_network_context(self):
         current = {'status': 'ACTIVE',
