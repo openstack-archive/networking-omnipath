@@ -167,6 +167,7 @@ class OmniPathThread(object):
             elif data['operation'] == "delete":
                 status = self.fabric_cli.osfa_config_commands("delete", net_id)
                 op_state = 'completed' if status == 0 else 'failed'
+                self._commit_and_reload()
             opadbapi.update_row_state(context, op_state, entry)
         elif entry.get('resource_type') == 'port':
             net_id = data['network_id']
