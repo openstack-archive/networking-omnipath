@@ -12,8 +12,8 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from neutron.db import sqlalchemytypes
 from neutron_lib.db import model_base
+from neutron_lib.db import sqlalchemytypes
 from oslo_utils import timeutils
 import sqlalchemy as sa
 

@@ -26,7 +26,7 @@ revision = 'fe3470e95eac'
 down_revision = 'initial_branchpoint'
 
 from alembic import op
-from neutron.db import sqlalchemytypes
+from neutron_lib.db import sqlalchemytypes
 from oslo_utils import timeutils
 import sqlalchemy as sa
 
