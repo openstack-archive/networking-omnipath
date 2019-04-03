@@ -122,7 +122,7 @@ class OmnipathMechanismDriver(api.MechanismDriver):
         network state. It is up to the mechanism driver to ignore
         state or state changes that it does not know or care about.
         """
-        pass
+        return
 
     def update_network_postcommit(self, context):
         """Update a network.
@@ -141,7 +141,7 @@ class OmnipathMechanismDriver(api.MechanismDriver):
         state or state changes that it does not know or care about.
         """
         # Is Network update required for OPA?
-        pass
+        return
 
     def delete_network_precommit(self, context):
         """Delete resources for a network.
@@ -195,7 +195,7 @@ class OmnipathMechanismDriver(api.MechanismDriver):
         cannot block.  Raising an exception will result in a rollback
         of the current transaction.
         """
-        pass
+        return
 
     def create_subnet_postcommit(self, context):
         """Create a subnet.
@@ -208,7 +208,7 @@ class OmnipathMechanismDriver(api.MechanismDriver):
         drastically affect performance. Raising an exception will
         cause the deletion of the resource.
         """
-        pass
+        return
 
     def update_subnet_precommit(self, context):
         """Update resources of a subnet.
@@ -226,7 +226,7 @@ class OmnipathMechanismDriver(api.MechanismDriver):
         subnet state. It is up to the mechanism driver to ignore
         state or state changes that it does not know or care about.
         """
-        pass
+        return
 
     def update_subnet_postcommit(self, context):
         """Update a subnet.
@@ -244,7 +244,7 @@ class OmnipathMechanismDriver(api.MechanismDriver):
         subnet state.  It is up to the mechanism driver to ignore
         state or state changes that it does not know or care about.
         """
-        pass
+        return
 
     def delete_subnet_precommit(self, context):
         """Delete resources for a subnet.
@@ -258,7 +258,7 @@ class OmnipathMechanismDriver(api.MechanismDriver):
         raising an exception will result in rollback of the
         transaction.
         """
-        pass
+        return
 
     def delete_subnet_postcommit(self, context):
         """Delete a subnet.
@@ -272,7 +272,7 @@ class OmnipathMechanismDriver(api.MechanismDriver):
         expected, and will not prevent the resource from being
         deleted.
         """
-        pass
+        return
 
     def create_port_precommit(self, context):
         """Allocate resources for a new port.
@@ -307,7 +307,7 @@ class OmnipathMechanismDriver(api.MechanismDriver):
         drastically affect performance.  Raising an exception will
         result in the deletion of the resource.
         """
-        pass
+        return
 
     def update_port_precommit(self, context):
         """Update resources of a port.
@@ -345,7 +345,7 @@ class OmnipathMechanismDriver(api.MechanismDriver):
         state changes that it does not know or care about.
         """
         # TODO(manjeets) update if needed
-        pass
+        return
 
     def _unplug_port_from_network(self, context):
         self.delete_port_precommit(context)
