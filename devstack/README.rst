@@ -4,7 +4,6 @@
 
 1. Clone networking-omnipath and devstack::
 
-    git clone https://github.intel.com/manjeets/networking-omnipath
     git clone https://github.com/openstack-dev/devstack
 
 2. Copy the sample local.conf over::
@@ -17,7 +16,7 @@
 
      > cat local.conf
      [[local|localrc]]
-     enable_plugin networking-omnipath /opt/stack/networking-omnipath
+     enable_plugin https://github.com/openstack/networking-omnipath
 
 
 4.  To enable OmniPath Backend add these parameters in the local.conf::
@@ -27,7 +26,6 @@
      username="root"
      ssh_key="<path to public ssh key authorized to access fabric>"
      ip_address="<ip address of fabric>"
-     pkey_ranges="pkey:1:2000"
 
 5. run ``stack.sh``
 
