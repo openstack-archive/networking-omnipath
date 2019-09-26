@@ -1,4 +1,0 @@
-Networking OmniPath Testing
----------------------------
-
-# TBD
